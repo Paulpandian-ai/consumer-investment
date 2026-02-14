@@ -95,10 +95,19 @@ st.title("\U0001f3af Factor Impact Intelligence")
 st.caption("Know what moves your stocks")
 
 # ---------------------------------------------------------------------------
+# Trending stock callback
+# ---------------------------------------------------------------------------
+def _select_trending(symbol: str):
+    """Set the selected ticker from a trending button click."""
+    st.session_state['selected_ticker'] = symbol
+
+# ---------------------------------------------------------------------------
 # Search bar
 # ---------------------------------------------------------------------------
+default_value = st.session_state.pop('selected_ticker', '')
 ticker = st.text_input(
     "",
+    value=default_value,
     placeholder="Search any stock (e.g., NVDA, AAPL, TSLA)",
     key="ticker_search",
     label_visibility="collapsed",
@@ -176,6 +185,10 @@ else:
     cols = st.columns(len(trending))
     for i, t in enumerate(trending):
         with cols[i]:
-            if st.button(t, key=f"trending_{t}", use_container_width=True):
-                st.session_state.ticker_search = t
-                st.rerun()
+            st.button(
+                t,
+                key=f"trending_{t}",
+                use_container_width=True,
+                on_click=_select_trending,
+                args=(t,),
+            )
