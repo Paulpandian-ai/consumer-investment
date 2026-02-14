@@ -3,7 +3,7 @@
 import sys
 import os
 
-_PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+_PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if _PROJECT_ROOT not in sys.path:
     sys.path.insert(0, _PROJECT_ROOT)
 
@@ -33,7 +33,7 @@ st.markdown("""
 from app.analysis.factor_engine import analyze_stock
 from app.components.risk_weather import render_risk_weather
 from app.components.signal_badge import render_signal
-from app.components.factor_cards import render_factor_card, FACTOR_CONFIG, get_traffic_light
+from app.components.factor_cards import FACTOR_CONFIG, get_traffic_light
 from app.components.charts import render_price_header
 
 st.title("\U0001f4ca Compare Stocks")
